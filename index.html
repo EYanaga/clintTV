@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Clint Stevens TV</title>
+
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Clint Stevens TV</h1>
+    <p class="subtitle">Automatically plays a random Clint Stevens video</p>
+  </header>
+
+  <main class="container">
+    <!-- PLAYER PLACEHOLDER:
+         Replace this div contents with the YouTube iFrame or player container later.
+         Keep an id so your JS can find it easily.
+    -->
+    <section id="player-area" class="player-area">
+        <div class="player-wrapper">
+            <!-- This is where the YouTube player iframe will be injected -->
+            <div id="player"></div>
+            
+            <!-- Placeholder content for before the player starts -->
+            <div id="player-placeholder" class="placeholder">
+                <p>Video player will appear here.</p>
+                <!-- <button id="start-demo" class="btn">Start demo (no video)</button> -->
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Simple controls / info area — useful later to show title, next button, etc. -->
+    <aside class="controls">
+      <div id="video-title" class="video-title">No video loaded</div>
+      <div class="actions">
+        <button id="next-btn" class="btn" disabled>Next (random)</button>
+        <!-- <button id="shuffle-btn" class="btn">Shuffle mode: OFF</button> -->
+      </div>
+    </aside>
+
+    <footer class="attribution">
+      <small>Built for personal use. Videos are hosted on YouTube.</small>
+    </footer>
+  </main>
+
+  <!-- Load YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <!-- Script loaded at end for faster page paint -->
+  <script src="script.js"></script>
+</body>
+</html>
