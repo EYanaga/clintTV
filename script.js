@@ -3,6 +3,7 @@
 // Global player reference
 let player;
 let videos = [];
+let seconds = 0;
 
 // Utility: pick random item from array
 function getRandomVideo() {
@@ -34,6 +35,7 @@ function createPlayer(videoId) {
       rel: 0
     },
     events: {
+      'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
     }
   });
@@ -50,8 +52,13 @@ function onPlayerStateChange(event) {
   }
 }
 
+function onPlayerReady(event) {
+  event.target.playVideo(); // optional — ensures playback starts
+}
+
 function updateTitle(videoId) {
-  document.getElementById('video-title').textContent = `Now playing: https://www.youtube.com/watch?v=${videoId}`;
+  // document.getElementById('video-title').textContent = `Now playing:    https://www.youtube.com/watch?v=${videoId}`;
+  document.getElementById('video-title').innerHTML = `Now playing: <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">https://www.youtube.com/watch?v=${videoId}</a>`;
 }
 
 // --- UI Controls (Next, Shuffle) ---
@@ -66,6 +73,25 @@ function setupControls() {
     updateTitle(next);
   });
 
+function updateTimer() {
+  seconds++;
+
+  const hrs = Math.floor(seconds / 3600);
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+
+  let formattedTime =
+    //`${hrs.toString().padStart(2, '0')}:` +
+    `${mins.toString().padStart(2, '0')}:` +
+    `${secs.toString().padStart(2, '0')}`;
+
+  if(hrs != 0) {
+    formattedTime = `${hrs.toString().padStart(2, '0')}:` + formattedTime;
+  }
+
+  document.getElementById('time-on-page').textContent = `TIME SPENT CLINT'ING: ${formattedTime}`;
+}
+
   // Optional shuffle toggle (doesn’t do much yet, but placeholder)
 //   let shuffle = false;
 //   shuffleBtn.addEventListener('click', () => {
@@ -75,4 +101,7 @@ function setupControls() {
 
 // Once the YouTube player is ready
 document.getElementById('player-placeholder').style.display = 'none';
+
+// Update Timer every second
+setInterval(updateTimer, 1000);
 }
